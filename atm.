@@ -1,0 +1,188 @@
+import java.util.ArrayList;
+import java.util.scanner;
+
+class user{
+    private string userld;
+    private string encryptedpin;
+    private double balance;
+    private ArrayList<string>
+transcationHistory;
+    
+    public user(string userld,string encryptedpin)
+    {
+        this.userld=userld;
+        this.encryptedpin=encryptedpin;
+        this.balance=0;
+        this.transcationHistory=new
+ArrayList<>();
+    }
+      
+
+      }
+      public string getEncryptedPin()
+      {
+        return encryptedpin;
+      }
+      public double getBalance()
+      {
+        return balance;
+      }
+      public ArrayList<string>
+getTransactionHistory()
+{
+    return transcationHistory;
+
+}
+public void deposit(double amount)
+{
+    if(amount>0)
+    {
+        balance+=amount;
+        transcationHistory.add("Deposited:"+amount);
+    }
+    }
+  public void withdraw(double amount)
+  {
+    if(amount>0&&amount<=balance)
+    {
+        balance-= amount;
+transcationHistory.add("withdrawn:"+amount);
+  }
+ }
+ private void transfer(user receiver,double amount)
+ {
+    if(amount>0&&amount<==balance)
+    {
+        balence-=amount;
+        receiver.deposit(amount);
+    transcationHistory.add("Transferred:"+amount+"to"+receiver.getuserld());
+
+    }
+ }
+}
+ public class atm
+ {
+    private static ArrayList<user>users=new ArrayList<>();
+      
+      public static void main(string[]args)
+      {
+        scanner scanner=new scanner(system.in)
+         
+         user.add(new user("123456","1234"));
+         system.out.println("welcome to the ATM");
+         system.out.println("Enter user ID:");
+         string userld=scanner.nextLine();
+         system.out.println("Enter PIN:");
+         string enteredPin=
+         string.nextLine();
+               user currentuser=authenticateUser(userld,enteredPin);
+        if(currentuser!=null)
+        {
+            system.out.println("Authentication successful");
+              performTransactions(currentuser,scanner);
+        }
+        else
+        {
+            system.out.println("Authenication Failed.Exiting....");
+
+        }
+        }
+               }
+         public static user
+    authenticateUser(string userld,string enteredPin)
+    {
+        for(user user:users)
+        {
+            if(user.getuserld(.equals(userld)&&user.getEncryptedPin().equals(hashpin(enteredPin)))
+        {
+              return user;
+
+        }
+        }
+        return null;
+
+    }
+       public static hashpin(string pin)
+{
+    return pin;
+
+}
+    public static void
+performTransactions(user user,scanner scanner)
+{
+    boolean exit=false;
+     
+     while(!exit)
+{
+    system.out.println("\nChoose an operation");
+    system.out.println("1.View balance");
+    system.out.println("2.Deposit");
+    system.out.println("3.Withdraw");
+    system.out.println("4.Transfer");
+    system.out.println("5.Transaction History");
+    system.out.println("6.Quit");
+
+    int choice=scanner.nextLine();
+
+    switch(choice)
+    {
+        case1:
+    system.out.println("current Balance:"+user.getBalance());
+      break:
+         
+         case2:
+    system.out.println("Enter deposit amount:");
+     double depositAmount=scanner.nextDouble();
+     user.deposit(depositAmount);
+     break;
+          
+          case3:
+     system.out.println("Enter withdrawal amount:");
+      double  withdrawalAmount=scanner.nextDouble();
+      user.withdraw(withdrawalAmount);
+      break;
+          case4;
+    system.out.println("enter recipient's account number:");
+     string recipientuserld=scanner.next();
+     user recipient=finduser(recipientuserld);
+     if(recipient!=null)
+     {
+        system.out.println("Enter transfer amount:");
+        double transferAmount=scanner.nextDouble();
+        user.transfer(recipient,transferAmount);
+     }    
+     else{
+        system.out.println("Recipients's account not found:");    
+         }
+         break:
+           case5;
+    system.out.println("Transaction history:");
+      for(string transaction:user.getTransactionHistory())
+      {
+        system.out.println(transaction);
+
+      }
+        break;
+            case6;
+             exit=true;
+             break;
+             default:
+    system.out.println("Invalid choice.please try again.");
+
+           }
+    }
+    system.out.println("Thank you for using the ATM.Have a nice day!");
+
+}
+public static user finduser(string userld)
+{
+    for(user user:users)
+    {
+        if(user.getuserld().equals(userld)
+        {
+
+        return user;
+    }
+}
+     return null;
+}
